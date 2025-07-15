@@ -5,6 +5,7 @@
 Ultralytics是一个基于YOLO（You Only Look Once）算法的计算机视觉框架，提供了SOTA（State-of-the-Art）的目标检测、实例分割、图像分类、姿态估计和多目标跟踪功能。
 
 ### 核心特点
+
 - **多任务支持**：检测、分割、分类、姿态估计、旋转边界框检测
 - **高性能**：实时推理，支持多种硬件加速
 - **易用性**：简洁的API和命令行接口
@@ -13,6 +14,7 @@ Ultralytics是一个基于YOLO（You Only Look Once）算法的计算机视觉�
 ## 2. 项目结构分析
 
 ### 2.1 目录结构
+
 ```
 ultralytics/
 ├── ultralytics/          # 核心代码目录
@@ -34,7 +36,8 @@ ultralytics/
 
 ### 2.2 核心模块分析
 
-#### ultralytics/__init__.py - 主入口点
+#### ultralytics/**init**.py - 主入口点
+
 ```python
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 # Ultralytics 🚀 AGPL-3.0 许可证 - https://ultralytics.com/license
@@ -75,23 +78,24 @@ __all__ = (
 
 ### 3.1 配置文件管理 (ultralytics/cfg/)
 
-#### __init__.py - 配置管理核心
+#### **init**.py - 配置管理核心
+
 ```python
 # Define valid solutions
 # 定义有效的解决方案
 SOLUTION_MAP = {
-    "count": "ObjectCounter",      # 目标计数
-    "crop": "ObjectCropper",       # 目标裁剪
-    "blur": "ObjectBlurrer",       # 目标模糊
-    "workout": "AIGym",            # AI健身
-    "heatmap": "Heatmap",          # 热力图
+    "count": "ObjectCounter",  # 目标计数
+    "crop": "ObjectCropper",  # 目标裁剪
+    "blur": "ObjectBlurrer",  # 目标模糊
+    "workout": "AIGym",  # AI健身
+    "heatmap": "Heatmap",  # 热力图
     "isegment": "InstanceSegmentation",  # 实例分割
-    "visioneye": "VisionEye",      # 视觉眼
-    "speed": "SpeedEstimator",     # 速度估计
-    "queue": "QueueManager",       # 队列管理
-    "analytics": "Analytics",      # 分析
-    "inference": "Inference",      # 推理
-    "trackzone": "TrackZone",      # 跟踪区域
+    "visioneye": "VisionEye",  # 视觉眼
+    "speed": "SpeedEstimator",  # 速度估计
+    "queue": "QueueManager",  # 队列管理
+    "analytics": "Analytics",  # 分析
+    "inference": "Inference",  # 推理
+    "trackzone": "TrackZone",  # 跟踪区域
     "help": None,
 }
 
@@ -100,28 +104,27 @@ SOLUTION_MAP = {
 MODES = frozenset({"train", "val", "predict", "export", "track", "benchmark"})
 TASKS = frozenset({"detect", "segment", "classify", "pose", "obb"})
 TASK2DATA = {
-    "detect": "coco8.yaml",        # 检测任务使用COCO数据集
-    "segment": "coco8-seg.yaml",   # 分割任务使用COCO分割数据集
-    "classify": "imagenet10",      # 分类任务使用ImageNet数据集
-    "pose": "coco8-pose.yaml",     # 姿态估计使用COCO姿态数据集
-    "obb": "dota8.yaml",           # 旋转边界框使用DOTA数据集
+    "detect": "coco8.yaml",  # 检测任务使用COCO数据集
+    "segment": "coco8-seg.yaml",  # 分割任务使用COCO分割数据集
+    "classify": "imagenet10",  # 分类任务使用ImageNet数据集
+    "pose": "coco8-pose.yaml",  # 姿态估计使用COCO姿态数据集
+    "obb": "dota8.yaml",  # 旋转边界框使用DOTA数据集
 }
 ```
 
 ### 3.2 模型引擎 (ultralytics/engine/)
 
 #### model.py - 模型基类
+
 ```python
 class Model(torch.nn.Module):
     """
-    A base class for implementing YOLO models, unifying APIs across different model types.
-    YOLO模型的基类，统一不同模型类型的API接口。
+    A base class for implementing YOLO models, unifying APIs across different model types. YOLO模型的基类，统一不同模型类型的API接口。.
 
-    This class provides a common interface for various operations related to YOLO models, such as training,
-    validation, prediction, exporting, and benchmarking. It handles different types of models, including those
-    loaded from local files, Ultralytics HUB, or Triton Server.
-    此类为YOLO模型的各种操作提供通用接口，如训练、验证、预测、导出和基准测试。
-    它处理不同类型的模型，包括从本地文件、Ultralytics HUB或Triton Server加载的模型。
+    This class provides a common interface for various operations related to YOLO models, such as training, validation,
+    prediction, exporting, and benchmarking. It handles different types of models, including those loaded from local
+    files, Ultralytics HUB, or Triton Server. 此类为YOLO模型的各种操作提供通用接口，如训练、验证、预测、导出和基准测试。 它处理不同类型的模型，包括从本地文件、Ultralytics
+    HUB或Triton Server加载的模型。
     """
 
     def __init__(
@@ -131,27 +134,23 @@ class Model(torch.nn.Module):
         verbose: bool = False,
     ) -> None:
         """
-        Initialize a new instance of the YOLO model class.
-        初始化YOLO模型类的新实例。
+        Initialize a new instance of the YOLO model class. 初始化YOLO模型类的新实例。.
 
-        This constructor sets up the model based on the provided model path or name. It handles various types of
-        model sources, including local files, Ultralytics HUB models, and Triton Server models. The method
-        initializes several important attributes of the model and prepares it for operations like training,
-        prediction, or export.
-        此构造函数根据提供的模型路径或名称设置模型。它处理各种类型的模型源，
-        包括本地文件、Ultralytics HUB模型和Triton Server模型。该方法初始化模型的几个重要属性，
-        并准备进行训练、预测或导出等操作。
+        This constructor sets up the model based on the provided model path or name. It handles various types of model
+        sources, including local files, Ultralytics HUB models, and Triton Server models. The method initializes several
+        important attributes of the model and prepares it for operations like training, prediction, or export.
+        此构造函数根据提供的模型路径或名称设置模型。它处理各种类型的模型源， 包括本地文件、Ultralytics HUB模型和Triton Server模型。该方法初始化模型的几个重要属性， 并准备进行训练、预测或导出等操作。
         """
 ```
 
 ### 3.3 YOLO模型实现 (ultralytics/models/yolo/)
 
 #### model.py - YOLO模型类
+
 ```python
 class YOLO(Model):
     """
-    YOLO (You Only Look Once) object detection model.
-    YOLO（You Only Look Once）目标检测模型。
+    YOLO (You Only Look Once) object detection model. YOLO（You Only Look Once）目标检测模型。.
 
     This class provides a unified interface for YOLO models, automatically switching to specialized model types
     (YOLOWorld or YOLOE) based on the model filename. It supports various computer vision tasks including object
@@ -162,8 +161,7 @@ class YOLO(Model):
 
     def __init__(self, model: Union[str, Path] = "yolo11n.pt", task: Optional[str] = None, verbose: bool = False):
         """
-        Initialize a YOLO model.
-        初始化YOLO模型。
+        Initialize a YOLO model. 初始化YOLO模型。.
 
         This constructor initializes a YOLO model, automatically switching to specialized model types
         (YOLOWorld or YOLOE) based on the model filename.
@@ -194,6 +192,7 @@ YOLO（You Only Look Once）是一种实时目标检测算法，其核心思想�
 ### 4.2 Ultralytics架构设计
 
 #### 4.2.1 模块化设计
+
 ```python
 # 任务映射机制
 @property
@@ -202,34 +201,38 @@ def task_map(self) -> Dict[str, Dict[str, Any]]:
     """将头部映射到模型、训练器、验证器和预测器类。"""
     return {
         "classify": {
-            "model": ClassificationModel,           # 分类模型
-            "trainer": yolo.classify.ClassificationTrainer,    # 分类训练器
-            "validator": yolo.classify.ClassificationValidator, # 分类验证器
-            "predictor": yolo.classify.ClassificationPredictor, # 分类预测器
+            "model": ClassificationModel,  # 分类模型
+            "trainer": yolo.classify.ClassificationTrainer,  # 分类训练器
+            "validator": yolo.classify.ClassificationValidator,  # 分类验证器
+            "predictor": yolo.classify.ClassificationPredictor,  # 分类预测器
         },
         "detect": {
-            "model": DetectionModel,               # 检测模型
-            "trainer": yolo.detect.DetectionTrainer,          # 检测训练器
-            "validator": yolo.detect.DetectionValidator,       # 检测验证器
-            "predictor": yolo.detect.DetectionPredictor,       # 检测预测器
+            "model": DetectionModel,  # 检测模型
+            "trainer": yolo.detect.DetectionTrainer,  # 检测训练器
+            "validator": yolo.detect.DetectionValidator,  # 检测验证器
+            "predictor": yolo.detect.DetectionPredictor,  # 检测预测器
         },
         # ... 其他任务
     }
 ```
 
 #### 4.2.2 统一接口设计
+
 ```python
 def __call__(self, source=None, stream=False, **kwargs):
     """
     Alias for the predict method, enabling the model instance to be callable for predictions.
-    预测方法的别名，使模型实例可调用进行预测。
+
+    预测方法的别名，使模型实例可调用进行预测。.
     """
     return self.predict(source, stream, **kwargs)
+
 
 def predict(self, source=None, stream=False, **kwargs):
     """
     Perform object detection predictions.
-    执行目标检测预测。
+
+    执行目标检测预测。.
     """
     # 预测逻辑实现
 ```
@@ -237,12 +240,14 @@ def predict(self, source=None, stream=False, **kwargs):
 ### 4.3 核心工作流程
 
 #### 4.3.1 模型加载流程
+
 1. **模型识别**：根据文件名判断模型类型（YOLO、YOLOWorld、YOLOE等）
 2. **配置加载**：从YAML文件或预训练权重中加载模型配置
 3. **模型初始化**：创建对应的模型实例和任务映射
 4. **权重加载**：加载预训练权重或随机初始化
 
 #### 4.3.2 训练流程
+
 1. **数据准备**：加载和预处理训练数据
 2. **模型配置**：设置训练参数和优化器
 3. **训练循环**：前向传播、损失计算、反向传播
@@ -250,6 +255,7 @@ def predict(self, source=None, stream=False, **kwargs):
 5. **模型保存**：保存最佳模型权重
 
 #### 4.3.3 推理流程
+
 1. **输入预处理**：图像缩放、归一化等
 2. **模型推理**：前向传播获取预测结果
 3. **后处理**：非极大值抑制（NMS）、置信度过滤
@@ -258,11 +264,13 @@ def predict(self, source=None, stream=False, **kwargs):
 ### 4.4 支持的模型类型
 
 #### 4.4.1 标准YOLO模型
+
 - **YOLOv11系列**：最新的YOLO版本，支持检测、分割、分类、姿态估计
 - **YOLOv8系列**：稳定版本，广泛使用
 - **YOLOv5系列**：经典版本，易于部署
 
 #### 4.4.2 特殊模型
+
 - **YOLOWorld**：开放词汇目标检测，支持文本描述检测
 - **YOLOE**：边缘优化的YOLO模型
 - **SAM**：Segment Anything Model，通用分割模型
@@ -272,62 +280,108 @@ def predict(self, source=None, stream=False, **kwargs):
 ## 5. 关键特性分析
 
 ### 5.1 多任务支持
+
 ```python
 # 支持的任务类型
 TASKS = frozenset({"detect", "segment", "classify", "pose", "obb"})
 
 # 任务到数据的映射
 TASK2DATA = {
-    "detect": "coco8.yaml",        # 目标检测
-    "segment": "coco8-seg.yaml",   # 实例分割
-    "classify": "imagenet10",      # 图像分类
-    "pose": "coco8-pose.yaml",     # 姿态估计
-    "obb": "dota8.yaml",           # 旋转边界框检测
+    "detect": "coco8.yaml",  # 目标检测
+    "segment": "coco8-seg.yaml",  # 实例分割
+    "classify": "imagenet10",  # 图像分类
+    "pose": "coco8-pose.yaml",  # 姿态估计
+    "obb": "dota8.yaml",  # 旋转边界框检测
 }
 ```
 
 ### 5.2 灵活的配置系统
+
 ```python
 # 配置键类型定义
-CFG_FLOAT_KEYS = frozenset({      # 浮点数参数
-    "warmup_epochs", "box", "cls", "dfl", "degrees", "shear", "time", "workspace", "batch",
-})
+CFG_FLOAT_KEYS = frozenset(
+    {  # 浮点数参数
+        "warmup_epochs",
+        "box",
+        "cls",
+        "dfl",
+        "degrees",
+        "shear",
+        "time",
+        "workspace",
+        "batch",
+    }
+)
 
-CFG_FRACTION_KEYS = frozenset({   # 分数参数（0.0<=值<=1.0）
-    "dropout", "lr0", "lrf", "momentum", "weight_decay", "warmup_momentum",
-    "warmup_bias_lr", "hsv_h", "hsv_s", "hsv_v", "translate", "scale",
-    "perspective", "flipud", "fliplr", "bgr", "mosaic", "mixup", "cutmix",
-    "copy_paste", "conf", "iou", "fraction",
-})
+CFG_FRACTION_KEYS = frozenset(
+    {  # 分数参数（0.0<=值<=1.0）
+        "dropout",
+        "lr0",
+        "lrf",
+        "momentum",
+        "weight_decay",
+        "warmup_momentum",
+        "warmup_bias_lr",
+        "hsv_h",
+        "hsv_s",
+        "hsv_v",
+        "translate",
+        "scale",
+        "perspective",
+        "flipud",
+        "fliplr",
+        "bgr",
+        "mosaic",
+        "mixup",
+        "cutmix",
+        "copy_paste",
+        "conf",
+        "iou",
+        "fraction",
+    }
+)
 
-CFG_INT_KEYS = frozenset({        # 整数参数
-    "epochs", "patience", "workers", "seed", "close_mosaic", "mask_ratio",
-    "max_det", "vid_stride", "line_width", "nbs", "save_period",
-})
+CFG_INT_KEYS = frozenset(
+    {  # 整数参数
+        "epochs",
+        "patience",
+        "workers",
+        "seed",
+        "close_mosaic",
+        "mask_ratio",
+        "max_det",
+        "vid_stride",
+        "line_width",
+        "nbs",
+        "save_period",
+    }
+)
 ```
 
 ### 5.3 丰富的解决方案
+
 ```python
 # 预构建解决方案
 SOLUTION_MAP = {
-    "count": "ObjectCounter",      # 目标计数
-    "crop": "ObjectCropper",       # 目标裁剪
-    "blur": "ObjectBlurrer",       # 目标模糊
-    "workout": "AIGym",            # AI健身
-    "heatmap": "Heatmap",          # 热力图
+    "count": "ObjectCounter",  # 目标计数
+    "crop": "ObjectCropper",  # 目标裁剪
+    "blur": "ObjectBlurrer",  # 目标模糊
+    "workout": "AIGym",  # AI健身
+    "heatmap": "Heatmap",  # 热力图
     "isegment": "InstanceSegmentation",  # 实例分割
-    "visioneye": "VisionEye",      # 视觉眼
-    "speed": "SpeedEstimator",     # 速度估计
-    "queue": "QueueManager",       # 队列管理
-    "analytics": "Analytics",      # 分析
-    "inference": "Inference",      # 推理
-    "trackzone": "TrackZone",      # 跟踪区域
+    "visioneye": "VisionEye",  # 视觉眼
+    "speed": "SpeedEstimator",  # 速度估计
+    "queue": "QueueManager",  # 队列管理
+    "analytics": "Analytics",  # 分析
+    "inference": "Inference",  # 推理
+    "trackzone": "TrackZone",  # 跟踪区域
 }
 ```
 
 ## 6. 性能优化策略
 
 ### 6.1 内存优化
+
 ```python
 # 设置环境变量减少CPU利用率
 if not os.environ.get("OMP_NUM_THREADS"):
@@ -336,22 +390,26 @@ if not os.environ.get("OMP_NUM_THREADS"):
 ```
 
 ### 6.2 模型融合
+
 ```python
 def fuse(self) -> None:
     """
     Fuse Conv2d and BatchNorm2d layers for optimized inference.
-    融合Conv2d和BatchNorm2d层以优化推理。
+
+    融合Conv2d和BatchNorm2d层以优化推理。.
     """
     # 融合逻辑实现
 ```
 
 ### 6.3 多设备支持
+
 ```python
 @property
 def device(self) -> torch.device:
     """
     Get the device of the model.
-    获取模型的设备。
+
+    获取模型的设备。.
     """
     # 设备检测逻辑
 ```
@@ -359,16 +417,19 @@ def device(self) -> torch.device:
 ## 7. 扩展性和可维护性
 
 ### 7.1 插件化架构
+
 - **回调系统**：支持自定义训练和推理回调
 - **模型扩展**：易于添加新的模型类型
 - **任务扩展**：支持新的计算机视觉任务
 
 ### 7.2 配置驱动
+
 - **YAML配置**：使用YAML文件管理模型配置
 - **参数覆盖**：支持命令行参数覆盖默认配置
 - **环境变量**：支持环境变量配置
 
 ### 7.3 文档和测试
+
 - **完整文档**：提供详细的API文档和使用指南
 - **测试覆盖**：包含单元测试和集成测试
 - **示例代码**：提供丰富的使用示例
@@ -384,4 +445,4 @@ Ultralytics项目通过模块化设计、统一接口和丰富的功能，为计
 5. **可扩展性**：支持自定义模型和任务
 6. **生产就绪**：支持多种部署格式和平台
 
-这个框架为研究人员和开发者提供了一个强大的工具，可以快速实现和部署各种计算机视觉应用。 
+这个框架为研究人员和开发者提供了一个强大的工具，可以快速实现和部署各种计算机视觉应用。
