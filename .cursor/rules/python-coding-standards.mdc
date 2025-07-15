@@ -1,0 +1,42 @@
+# Python编码标准
+
+## 代码风格
+- 使用 **120字符** 的行长度限制
+- 遵循 **PEP 8** 风格指南
+- 使用 **Google风格** 的docstring
+- 使用 **yapf** 进行代码格式化
+
+## 导入规范
+- 标准库导入在前
+- 第三方库导入在中间
+- 本地模块导入在最后
+- 使用 `isort` 自动排序导入
+
+## 类型注解
+- 为所有函数参数和返回值添加类型注解
+- 使用 `str` 类型而不是 `Path` 类型作为函数参数
+- 在需要时使用 `Union` 和 `Optional`
+
+## 测试规范
+- 使用 `pytest` 框架
+- 测试函数以 `test_` 开头
+- 使用 `@pytest.mark.parametrize` 进行参数化测试
+- 使用 `@pytest.mark.skipif` 跳过特定条件的测试
+
+## 文档规范
+- 所有公共函数和类必须有docstring
+- 使用Google风格的docstring格式
+- 包含参数类型、返回类型和描述
+
+## 错误处理
+- 使用 `subprocess.run(cmd.split(), check=True)` 执行shell命令
+- 适当处理异常和错误情况
+
+## 配置管理
+- 使用 `pyproject.toml` 管理项目配置
+- 依赖版本在 `dependencies` 部分指定
+- 可选依赖在 `[project.optional-dependencies]` 中定义
+description:
+globs:
+alwaysApply: false
+---

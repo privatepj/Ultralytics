@@ -65,7 +65,7 @@ def test_rtdetr(task: str = "detect", model: str = "yolov8n-rtdetr.yaml", data: 
     reason="MobileSAM with CLIP is not supported in Python 3.8 and aarch64 Linux",
 )
 def test_fastsam(
-    task: str = "segment", model: str = WEIGHTS_DIR / "FastSAM-s.pt", data: str = "coco8-seg.yaml"
+    task: str = "segment", model: str = str(WEIGHTS_DIR / "FastSAM-s.pt"), data: str = "coco8-seg.yaml"
 ) -> None:
     """Test FastSAM model for segmenting objects in images using various prompts within Ultralytics."""
     source = ASSETS / "bus.jpg"
@@ -95,7 +95,7 @@ def test_mobilesam() -> None:
     from ultralytics import SAM
 
     # Load the model
-    model = SAM(WEIGHTS_DIR / "mobile_sam.pt")
+    model = SAM(str(WEIGHTS_DIR / "mobile_sam.pt"))
 
     # Source
     source = ASSETS / "zidane.jpg"

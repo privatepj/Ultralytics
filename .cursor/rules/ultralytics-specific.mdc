@@ -1,0 +1,93 @@
+# Ultralytics开发指南
+
+## 模型使用
+
+### 基本模型类
+```python
+from ultralytics import YOLO, SAM, FastSAM, RTDETR
+
+# 加载模型
+model = YOLO('yolov8n.pt')  # 检测模型
+sam_model = SAM('mobile_sam.pt')  # SAM模型
+fastsam_model = FastSAM('FastSAM-s.pt')  # FastSAM模型
+rtdetr_model = RTDETR('yolov8n-rtdetr.yaml')  # RTDETR模型
+```
+
+### 模型任务
+- **detect** - 目标检测
+- **segment** - 实例分割
+- **classify** - 图像分类
+- **pose** - 姿态估计
+- **obb** - 旋转边界框检测
+
+## CLI命令
+
+### 基本命令
+```bash
+# 训练
+yolo train detect model=yolov8n.pt data=coco8.yaml epochs=1
+
+# 验证
+yolo val detect model=yolov8n.pt data=coco8.yaml
+
+# 预测
+yolo predict detect model=yolov8n.pt source=image.jpg
+
+# 导出
+yolo export model=yolov8n.pt format=torchscript
+```
+
+### 特殊命令
+```bash
+yolo help          # 显示帮助
+yolo checks        # 系统检查
+yolo version       # 版本信息
+yolo settings      # 设置管理
+yolo cfg           # 配置管理
+```
+
+## 配置管理
+
+### 模型配置
+- 配置文件位于 `ultralytics/cfg/models/`
+- 数据集配置位于 `ultralytics/cfg/datasets/`
+- 使用YAML格式定义配置
+
+### 环境变量
+- `OMP_NUM_THREADS=1` - 减少CPU利用率
+- 支持CUDA和CPU训练
+- 自动设备检测
+
+## 最佳实践
+
+### 类型安全
+- 使用 `str` 类型作为模型路径参数
+- 避免直接使用 `Path` 对象作为函数参数
+- 在需要时进行类型转换
+
+### 错误处理
+- 检查CUDA可用性
+- 验证模型文件存在
+- 处理版本兼容性问题
+
+### 性能优化
+- 使用适当的图像尺寸
+- 启用缓存加速训练
+- 使用多GPU训练（如果可用）
+
+## 解决方案
+Ultralytics提供多种预构建解决方案：
+- 目标计数
+- 图像模糊
+- 运动检测
+- 热力图
+- 交互式分割
+- 视觉分析
+- 速度检测
+- 队列处理
+- 分析工具
+- 跟踪区域
+description:
+globs:
+alwaysApply: false
+---

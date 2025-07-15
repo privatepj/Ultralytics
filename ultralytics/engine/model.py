@@ -27,10 +27,13 @@ from ultralytics.utils import (
 class Model(torch.nn.Module):
     """
     A base class for implementing YOLO models, unifying APIs across different model types.
+    YOLO模型的基类，统一不同模型类型的API接口。
 
     This class provides a common interface for various operations related to YOLO models, such as training,
     validation, prediction, exporting, and benchmarking. It handles different types of models, including those
     loaded from local files, Ultralytics HUB, or Triton Server.
+    此类为YOLO模型的各种操作提供通用接口，如训练、验证、预测、导出和基准测试。
+    它处理不同类型的模型，包括从本地文件、Ultralytics HUB或Triton Server加载的模型。
 
     Attributes:
         callbacks (dict): A dictionary of callback functions for various events during model operations.

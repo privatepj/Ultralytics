@@ -1,0 +1,48 @@
+# Ultralytics项目结构指南
+
+## 项目概述
+Ultralytics是一个用于SOTA目标检测、多目标跟踪、实例分割、姿态估计和图像分类的YOLO框架。
+
+## 主要目录结构
+
+### 核心模块 (`ultralytics/`)
+- **`ultralytics/__init__.py`** - 主入口点，导出所有主要模型类
+- **`ultralytics/models/`** - 包含所有模型实现（YOLO、SAM、FastSAM、RTDETR等）
+- **`ultralytics/engine/`** - 训练、验证、预测引擎
+- **`ultralytics/data/`** - 数据处理和增强
+- **`ultralytics/utils/`** - 工具函数和辅助模块
+- **`ultralytics/cfg/`** - 配置文件和设置
+- **`ultralytics/nn/`** - 神经网络模块
+- **`ultralytics/solutions/`** - 预构建的解决方案
+- **`ultralytics/trackers/`** - 目标跟踪器
+- **`ultralytics/hub/`** - Ultralytics HUB集成
+
+### 测试 (`tests/`)
+- **`tests/test_cli.py`** - CLI命令测试
+- **`tests/__init__.py`** - 测试常量和配置
+
+### 文档 (`docs/`)
+- 完整的API文档和使用指南
+
+### 示例 (`examples/`)
+- 各种集成和部署示例
+
+## 主要模型类
+从 `ultralytics/__init__.py` 导出的主要类：
+- `YOLO` - 标准YOLO模型
+- `YOLOWorld` - YOLO World模型
+- `YOLOE` - YOLO Edge模型
+- `SAM` - Segment Anything Model
+- `FastSAM` - 快速SAM模型
+- `RTDETR` - Real-Time Detection Transformer
+- `NAS` - Neural Architecture Search
+
+## 开发指南
+- 使用 `pyproject.toml` 管理依赖和配置
+- 遵循AGPL-3.0许可证
+- 支持Python 3.8+
+- 主要依赖：torch, opencv-python, pillow, numpy等
+description:
+globs:
+alwaysApply: false
+---

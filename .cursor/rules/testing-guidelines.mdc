@@ -1,0 +1,58 @@
+# 测试指南
+
+## 测试结构
+- 测试文件位于 `tests/` 目录
+- 测试函数以 `test_` 开头
+- 使用 `tests/__init__.py` 中的常量和配置
+
+## 测试类型
+
+### CLI测试
+- 测试YOLO命令行接口
+- 使用 `subprocess.run()` 执行命令
+- 测试各种任务：train, val, predict, export
+- 测试特殊模式：help, checks, version, settings
+
+### 模型测试
+- 测试不同模型类型：YOLO, SAM, FastSAM, RTDETR
+- 测试不同任务：detect, segment, classify, pose
+- 使用参数化测试覆盖多种组合
+
+### 集成测试
+- 测试模型训练、验证、预测的完整流程
+- 测试模型导出功能
+- 测试解决方案功能
+
+## 测试标记
+- `@pytest.mark.slow` - 标记慢速测试
+- `@pytest.mark.skipif` - 条件跳过测试
+- `@pytest.mark.parametrize` - 参数化测试
+
+## 测试数据
+- 使用 `ASSETS` 目录中的测试图像
+- 使用 `WEIGHTS_DIR` 中的预训练模型
+- 使用 `TASK_MODEL_DATA` 常量定义测试组合
+
+## 环境检查
+- 检查CUDA可用性
+- 检查设备数量
+- 检查Python版本兼容性
+
+## 测试命令
+```bash
+# 运行所有测试
+pytest
+
+# 运行慢速测试
+pytest --slow
+
+# 运行特定测试文件
+pytest tests/test_cli.py
+
+# 生成覆盖率报告
+pytest --cov=ultralytics
+```
+description:
+globs:
+alwaysApply: false
+---

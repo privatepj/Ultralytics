@@ -1,0 +1,104 @@
+# 调试和故障排除指南
+
+## 常见类型错误
+
+### Path vs str 类型错误
+**问题**: 将 `Path` 对象传递给期望 `str` 的函数
+```python
+# 错误示例
+model = SAM(WEIGHTS_DIR / "mobile_sam.pt")  # Path对象
+
+# 正确示例
+model = SAM(str(WEIGHTS_DIR / "mobile_sam.pt"))  # 转换为str
+```
+
+### 导入错误
+**问题**: 无法解析导入 "pytest"
+**解决方案**: 
+- 确保安装了开发依赖：`pip install -e .[dev]`
+- 检查虚拟环境是否正确激活
+- 验证 `pyproject.toml` 中的依赖配置
+
+## 环境问题
+
+### CUDA相关问题
+```python
+# 检查CUDA可用性
+from ultralytics.utils.checks import cuda_is_available
+if cuda_is_available():
+    print("CUDA可用")
+else:
+    print("使用CPU模式")
+```
+
+### 内存问题
+- 减少 `imgsz` 参数
+- 使用较小的批次大小
+- 启用梯度检查点
+
+### 版本兼容性
+- Python 3.8+ 支持
+- PyTorch >= 1.8.0
+- 某些功能在特定Python版本中不可用
+
+## 测试问题
+
+### 测试失败
+1. 检查测试环境
+2. 验证依赖安装
+3. 检查CUDA配置
+4. 查看测试日志
+
+### 跳过测试
+```python
+@pytest.mark.skipif(not CUDA_IS_AVAILABLE, reason="CUDA不可用")
+@pytest.mark.skipif(checks.IS_PYTHON_3_12, reason="Python 3.12不支持")
+```
+
+## 性能问题
+
+### 训练速度慢
+- 检查 `OMP_NUM_THREADS` 设置
+- 使用GPU训练
+- 启用数据缓存
+- 优化数据加载
+
+### 内存不足
+- 减少批次大小
+- 使用较小的图像尺寸
+- 启用混合精度训练
+
+## 调试技巧
+
+### 启用详细输出
+```bash
+yolo train detect model=yolov8n.pt data=coco8.yaml verbose=True
+```
+
+### 检查系统状态
+```bash
+yolo checks
+```
+
+### 查看版本信息
+```bash
+yolo version
+```
+
+## 日志和错误报告
+
+### 启用调试日志
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+```
+
+### 错误报告
+- 包含完整的错误信息
+- 提供环境信息（Python版本、PyTorch版本等）
+- 包含复现步骤
+- 提供系统配置信息
+description:
+globs:
+alwaysApply: false
+---
