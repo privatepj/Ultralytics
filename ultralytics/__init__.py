@@ -1,4 +1,5 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
 # Ultralytics 🚀 AGPL-3.0 许可证 - https://ultralytics.com/license
 
 __version__ = "8.3.167"

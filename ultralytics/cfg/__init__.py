@@ -32,18 +32,18 @@ from ultralytics.utils import (
 # Define valid solutions
 # 定义有效的解决方案
 SOLUTION_MAP = {
-    "count": "ObjectCounter",      # 目标计数
-    "crop": "ObjectCropper",       # 目标裁剪
-    "blur": "ObjectBlurrer",       # 目标模糊
-    "workout": "AIGym",            # AI健身
-    "heatmap": "Heatmap",          # 热力图
+    "count": "ObjectCounter",  # 目标计数
+    "crop": "ObjectCropper",  # 目标裁剪
+    "blur": "ObjectBlurrer",  # 目标模糊
+    "workout": "AIGym",  # AI健身
+    "heatmap": "Heatmap",  # 热力图
     "isegment": "InstanceSegmentation",  # 实例分割
-    "visioneye": "VisionEye",      # 视觉眼
-    "speed": "SpeedEstimator",     # 速度估计
-    "queue": "QueueManager",       # 队列管理
-    "analytics": "Analytics",      # 分析
-    "inference": "Inference",      # 推理
-    "trackzone": "TrackZone",      # 跟踪区域
+    "visioneye": "VisionEye",  # 视觉眼
+    "speed": "SpeedEstimator",  # 速度估计
+    "queue": "QueueManager",  # 队列管理
+    "analytics": "Analytics",  # 分析
+    "inference": "Inference",  # 推理
+    "trackzone": "TrackZone",  # 跟踪区域
     "help": None,
 }
 
@@ -52,11 +52,11 @@ SOLUTION_MAP = {
 MODES = frozenset({"train", "val", "predict", "export", "track", "benchmark"})
 TASKS = frozenset({"detect", "segment", "classify", "pose", "obb"})
 TASK2DATA = {
-    "detect": "coco8.yaml",        # 检测任务使用COCO数据集
-    "segment": "coco8-seg.yaml",   # 分割任务使用COCO分割数据集
-    "classify": "imagenet10",      # 分类任务使用ImageNet数据集
-    "pose": "coco8-pose.yaml",     # 姿态估计使用COCO姿态数据集
-    "obb": "dota8.yaml",           # 旋转边界框使用DOTA数据集
+    "detect": "coco8.yaml",  # 检测任务使用COCO数据集
+    "segment": "coco8-seg.yaml",  # 分割任务使用COCO分割数据集
+    "classify": "imagenet10",  # 分类任务使用ImageNet数据集
+    "pose": "coco8-pose.yaml",  # 姿态估计使用COCO姿态数据集
+    "obb": "dota8.yaml",  # 旋转边界框使用DOTA数据集
 }
 TASK2MODEL = {
     "detect": "yolo11n.pt",
