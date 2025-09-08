@@ -32,18 +32,18 @@ from ultralytics.utils import (
 # Define valid solutions
 # 定义有效的解决方案
 SOLUTION_MAP = {
-    "count": "ObjectCounter",      # 目标计数
-    "crop": "ObjectCropper",       # 目标裁剪
-    "blur": "ObjectBlurrer",       # 目标模糊
-    "workout": "AIGym",            # AI健身
-    "heatmap": "Heatmap",          # 热力图
+    "count": "ObjectCounter",  # 目标计数
+    "crop": "ObjectCropper",  # 目标裁剪
+    "blur": "ObjectBlurrer",  # 目标模糊
+    "workout": "AIGym",  # AI健身
+    "heatmap": "Heatmap",  # 热力图
     "isegment": "InstanceSegmentation",  # 实例分割
-    "visioneye": "VisionEye",      # 视觉眼
-    "speed": "SpeedEstimator",     # 速度估计
-    "queue": "QueueManager",       # 队列管理
-    "analytics": "Analytics",      # 分析
-    "inference": "Inference",      # 推理
-    "trackzone": "TrackZone",      # 跟踪区域
+    "visioneye": "VisionEye",  # 视觉眼
+    "speed": "SpeedEstimator",  # 速度估计
+    "queue": "QueueManager",  # 队列管理
+    "analytics": "Analytics",  # 分析
+    "inference": "Inference",  # 推理
+    "trackzone": "TrackZone",  # 跟踪区域
     "help": None,
 }
 
@@ -52,11 +52,11 @@ SOLUTION_MAP = {
 MODES = frozenset({"train", "val", "predict", "export", "track", "benchmark"})
 TASKS = frozenset({"detect", "segment", "classify", "pose", "obb"})
 TASK2DATA = {
-    "detect": "coco8.yaml",        # 检测任务使用COCO数据集
-    "segment": "coco8-seg.yaml",   # 分割任务使用COCO分割数据集
-    "classify": "imagenet10",      # 分类任务使用ImageNet数据集
-    "pose": "coco8-pose.yaml",     # 姿态估计使用COCO姿态数据集
-    "obb": "dota8.yaml",           # 旋转边界框使用DOTA数据集
+    "detect": "coco8.yaml",  # 检测任务使用COCO数据集
+    "segment": "coco8-seg.yaml",  # 分割任务使用COCO分割数据集
+    "classify": "imagenet10",  # 分类任务使用ImageNet数据集
+    "pose": "coco8-pose.yaml",  # 姿态估计使用COCO姿态数据集
+    "obb": "dota8.yaml",  # 旋转边界框使用DOTA数据集
 }
 TASK2MODEL = {
     "detect": "yolo11n.pt",
@@ -239,7 +239,7 @@ CFG_BOOL_KEYS = frozenset(
 )
 
 
-def cfg2dict(cfg: Union[str, Path, Dict, SimpleNamespace]) -> Dict:
+def cfg2dict(cfg: Union[str, Path, dict, SimpleNamespace]) -> dict:
     """
     Convert a configuration object to a dictionary.
 
@@ -274,7 +274,7 @@ def cfg2dict(cfg: Union[str, Path, Dict, SimpleNamespace]) -> Dict:
     return cfg
 
 
-def get_cfg(cfg: Union[str, Path, Dict, SimpleNamespace] = DEFAULT_CFG_DICT, overrides: Dict = None) -> SimpleNamespace:
+def get_cfg(cfg: Union[str, Path, dict, SimpleNamespace] = DEFAULT_CFG_DICT, overrides: dict = None) -> SimpleNamespace:
     """
     Load and merge configuration data from a file or dictionary, with optional overrides.
 
@@ -322,7 +322,7 @@ def get_cfg(cfg: Union[str, Path, Dict, SimpleNamespace] = DEFAULT_CFG_DICT, ove
     return IterableSimpleNamespace(**cfg)
 
 
-def check_cfg(cfg: Dict, hard: bool = True) -> None:
+def check_cfg(cfg: dict, hard: bool = True) -> None:
     """
     Check configuration argument types and values for the Ultralytics library.
 
@@ -416,7 +416,7 @@ def get_save_dir(args: SimpleNamespace, name: str = None) -> Path:
     return Path(save_dir)
 
 
-def _handle_deprecation(custom: Dict) -> Dict:
+def _handle_deprecation(custom: dict) -> dict:
     """
     Handle deprecated configuration keys by mapping them to current equivalents with deprecation warnings.
 
@@ -460,7 +460,7 @@ def _handle_deprecation(custom: Dict) -> Dict:
     return custom
 
 
-def check_dict_alignment(base: Dict, custom: Dict, e: Exception = None) -> None:
+def check_dict_alignment(base: dict, custom: dict, e: Exception = None) -> None:
     """
     Check alignment between custom and base configuration dictionaries, handling deprecated keys and providing error
     messages for mismatched keys.
@@ -500,7 +500,7 @@ def check_dict_alignment(base: Dict, custom: Dict, e: Exception = None) -> None:
         raise SyntaxError(string + CLI_HELP_MSG) from e
 
 
-def merge_equals_args(args: List[str]) -> List[str]:
+def merge_equals_args(args: list[str]) -> list[str]:
     """
     Merge arguments around isolated '=' in a list of strings and join fragments with brackets.
 
@@ -559,7 +559,7 @@ def merge_equals_args(args: List[str]) -> List[str]:
     return new_args
 
 
-def handle_yolo_hub(args: List[str]) -> None:
+def handle_yolo_hub(args: list[str]) -> None:
     """
     Handle Ultralytics HUB command-line interface (CLI) commands for authentication.
 
@@ -589,7 +589,7 @@ def handle_yolo_hub(args: List[str]) -> None:
         hub.logout()
 
 
-def handle_yolo_settings(args: List[str]) -> None:
+def handle_yolo_settings(args: list[str]) -> None:
     """
     Handle YOLO settings command-line interface (CLI) commands.
 
@@ -632,7 +632,7 @@ def handle_yolo_settings(args: List[str]) -> None:
         LOGGER.warning(f"settings error: '{e}'. Please see {url} for help.")
 
 
-def handle_yolo_solutions(args: List[str]) -> None:
+def handle_yolo_solutions(args: list[str]) -> None:
     """
     Process YOLO solutions arguments and run the specified computer vision solutions pipeline.
 
